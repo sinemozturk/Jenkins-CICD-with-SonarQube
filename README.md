@@ -399,19 +399,47 @@ docker ps
 `Administration`: Administration encompasses the management and configuration of SonarQube instances, including user management, setting up projects, configuring analysis parameters, and managing plugins and extensions.
 
 
-# Global Tool Configuration for SonarQube
+## Global Tool Configuration for SonarQube
 
-- Go to Jenkins Dashboard and navigate to `Global Tool Configuration` and find the `SonarQube` it is there because we installed related plugin. 
+- Go to `Jenkins` Dashboard -> `Manage Jenkins` and navigate to `Global Tool Configuration` and find the `SonarQube` it is there because we installed related plugin. 
 
 - Provide a name with `sonar-scanner` and choose `install automatically` and choose the latest version. 
 
 ![](./images/sonar%20tool%20config.PNG)
 
 
+## Generate Token from SonarQube
 
+- Go to `SonarQube` dashboard and go `Administation` -> `Users` -> Click `Admin's icon` below image and give a name and save the token. 
+
+![](./images/sonar-admin.PNG)
+
+![](./images/token%20generated.PNG)
+
+## Configure Crendentials for SonarQube in Jenkins Server
+
+- Go to `Jenkins` dashboard -> `Manage Jenkins` -> `Credentials` and add credential 
+    - `Kind` : Secret text
+    - `Secret`: Paste the Sonar's token
+    - `Description`: sonar-token 
+
+![](./images/add%20credential.PNG)
+
+![](./images/add%20credential%20global.PNG)
+
+## Configure SonarQube Server with `Confgure System`
+
+- Go to Jenkins Dashboard and navigate to `System` and find the `SonarQube` add sonarqube provide the information and apply changes
+    - `Name`: sonar-server
+    - `Server URL` : http//:<<publicIP>>:9000/
+    - `Server authentication token`: choose `sonar-token`
+
+![](./images/sysyem.PNG)
 
 
 
 # PIPELINE WITH SONARQUBE
 
+- Go back to pipeline script and let's modift with sonarqube stage
 
+- 
