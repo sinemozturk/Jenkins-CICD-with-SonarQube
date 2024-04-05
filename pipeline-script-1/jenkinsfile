@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/jaiswaladi246/Petclinic.git'
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh "mvn clean compile"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "mvn clean package"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "sudo -S cp target/petclinic.war /opt/apache-tomcat-9.0.67/webapps" 
+            }
+        }
+    }
+}
